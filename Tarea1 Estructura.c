@@ -7,9 +7,9 @@
 //codificador
 void codificar(char texto[], char str1[], char str2[]){
   //primer ciclo recorre el texto
-  for(int i=0;i<9;i++){
+  for(int i=0;i<strlen(texto);i++){
     char ct=texto[i];
-    for (int e=0;e<3;e++){
+    for (int e=0;e<strlen(str1);e++){
       //segundo ciclo recorre las palabras claves 
       char p1=str1[e];
       char p2=str2[e];
@@ -25,9 +25,10 @@ void codificar(char texto[], char str1[], char str2[]){
     }
   }
   // mostas codificado 
-  printf("Texto : \n");
+  printf("\nTexto: \n");
   printf("%s",texto);
 }
+
 //Función que verifica que las palabras cumplan los requisitos
 int requisito(char str1[], char str2[]){
 
@@ -40,7 +41,7 @@ int requisito(char str1[], char str2[]){
   //Si se cumplen los requisitos (largo 5 e igual largo ambas) entra al if
   if(len1==len2 && len1==5){
     
-    for(j=0; j<5; j++){
+    for(j=0; j<len1; j++){
 
       // Si pass es igual a 1 (Que alguna letra este repetida) todo se rompe 
       if (pass==1){
@@ -48,7 +49,7 @@ int requisito(char str1[], char str2[]){
       }
 
       //ciclo anidado donde i y j es la posición de las letras de las palabras
-      for(i=0; i<5; i++){
+      for(i=0; i<len1; i++){
 
         //Se comprueba que las letras sean mayusculas o no
         int r = isupper(str1[i]);
@@ -78,7 +79,7 @@ int requisito(char str1[], char str2[]){
 }
 
 //Procedimiento base de enigma, donde se dan 5 variables (Nombre entrada archivo, acción decode o encode, palabra clave 1 y palabra clave 2, y por ultimo nombre salida archivo)
-void enigma(char nombreE[], char accion[], , char mensaje[], char palabra1[], char palabra2[], char nombreS[]) {
+void enigma(char nombreE[], char accion[], char mensaje[] , char palabra1[], char palabra2[], char nombreS[]) {
   
   printf("\n%s\n", nombreE);
 
@@ -92,10 +93,12 @@ void enigma(char nombreE[], char accion[], , char mensaje[], char palabra1[], ch
     int valor = strcmp(accion, "encode");
     int valor2 = strcmp(accion, "decode");
     if (valor==0){
-      printf("encode");
+      //printf("encode");
+      codificar(mensaje, palabra1, palabra2);
       }
     if (valor2==0){
-      printf("decode");
+      //printf("decode");
+      codificar(mensaje, palabra1, palabra2);
       }
     if (valor!=0 && valor2!=0) {
       printf("Error, corralo de nuevo");
@@ -107,6 +110,9 @@ void enigma(char nombreE[], char accion[], , char mensaje[], char palabra1[], ch
 }
   
 int main(void) {
-  enigma("Hola.txt", "decode", "Wena waxho qlo", "qwerv", "Tsdfg",   "Chao.txt");
+  char texto[]="HOla a todos!";
+  char str1[] = "Puro";
+  char str2[] = "Hace";
+  enigma("Hola.txt", "decode", texto, str1, str2,   "Chao.txt");
   return 0;
 }
