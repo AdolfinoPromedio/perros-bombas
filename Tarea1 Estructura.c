@@ -4,6 +4,30 @@
 #include <stdbool.h>
 #include <ctype.h>
 
+//codificador
+void codificar(char texto[], char str1[], char str2[]){
+  //primer ciclo recorre el texto
+  for(int i=0;i<9;i++){
+    char ct=texto[i];
+    for (int e=0;e<3;e++){
+      //segundo ciclo recorre las palabras claves 
+      char p1=str1[e];
+      char p2=str2[e];
+      //si la palabra del texto selecionada coincide con 
+      //una de las palabras claves.
+      if(p1==ct){
+        //si coinciden se reemplaza con la otra palabra en la misma posicion.
+        texto[i]=p2;
+      }
+      else if(p2==ct){
+        texto[i]=p1;
+      }
+    }
+  }
+  // mostas codificado 
+  printf("Texto : \n");
+  printf("%s",texto);
+}
 //Función que verifica que las palabras cumplan los requisitos
 int requisito(char str1[], char str2[]){
 
