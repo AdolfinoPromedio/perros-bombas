@@ -22,13 +22,23 @@ void codificar(char texto[], char str1[], char str2[], char nombreS[]){
       //segundo ciclo recorre las palabras claves 
       char p1=str1[e];
       char p2=str2[e];
-      //si la palabra del texto selecionada coincide con una de las palabras claves.
-      if(p1==ct){
+      //si la letra del texto seleccionada coincide con una de las letras de las palabras claves.
+      if(tolower(p1)==tolower(ct)){
         //si coinciden se reemplaza con la otra palabra en la misma posicion.
-        texto[i]=p2;
+        if (isupper(ct)!=0){
+            texto[i]=toupper(p2);
+        }
+        else{
+            texto[i]=p2;
+        }
       }
-      else if(p2==ct){
-        texto[i]=p1;
+      else if(tolower(p2)==tolower(ct)){
+         if (isupper(ct)!=0){
+            texto[i]=toupper(p1);
+        }
+        else{
+            texto[i]=p1;
+        }
       }
     }
   }
@@ -36,14 +46,13 @@ void codificar(char texto[], char str1[], char str2[], char nombreS[]){
   escribir(nombreS, texto);
 }
 
-//Procedimiento que lee el archivo de entrada con el mensaje y lo guarda en frase.
+//Procedimiento que lee el archivo de entrada con el mensaje y lo guarda en frase
 void leer(char nombreE[], char palabra1[], char palabra2[], char nombreS[]){
     FILE *fin;
     fin = fopen(nombreE, "r");
     char frase[60];
     fgets(frase, 60, fin);
     fclose(fin);
-    //Luego es codificado.
     codificar(frase, palabra1, palabra2, nombreS);
 }
 
@@ -111,11 +120,11 @@ void enigma(char nombreE[], char accion[], char palabra1[], char palabra2[], cha
     int valor = strcmp(accion, "encode");
     int valor2 = strcmp(accion, "decode");
     if (valor==0){
-      printf("El mensaje fue codificado");
+      printf("Se ha codificado el mensaje");
       leer(nombreE, palabra1, palabra2, nombreS);
       }
     if (valor2==0){
-      printf("El mensaje fue decodificado");
+      printf("Se ha decodificado el mensaje");
       leer(nombreE, palabra1, palabra2, nombreS);
       }
     if (valor!=0 && valor2!=0) {
@@ -126,12 +135,12 @@ void enigma(char nombreE[], char accion[], char palabra1[], char palabra2[], cha
   
 int main(void) {  
 
-  char accion[20];
-  printf("Desea codificar (encode) o decodificar (decode): ");
+  char accion[30];
+  printf("Que desea, codificar(encode) o decodificar(decode): ");
   scanf("%s", accion);
   
-  char nombreS[60];
-  printf("Ingrese el nombre del archivo de salida: ");
+  char nombreS[30];
+  printf("Nombre del archivo de salida: ");
   scanf("%s", nombreS);
   
   char nombreE[] = "Hola.txt";
